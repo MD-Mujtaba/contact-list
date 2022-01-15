@@ -1,0 +1,33 @@
+<!-- PrimeNG -->
+<form (ngSubmit)="login(loginForm.value)" #loginForm="ngForm">
+  <p-card>
+    <ng-template pTemplate="header"> </ng-template>
+    <input
+      type="text"
+      placeholder="Email"
+      class="mr-2"
+      pInputText
+      id="email"
+      required
+      ngModel
+      name="email"
+    />
+    <input
+      type="text"
+      placeholder="Password"
+      pInputText
+      id="password"
+      required
+      ngModel
+      name="password"
+    />
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        label="Login"
+        icon="pi pi-check"
+        routerLink="contact-list"
+      ></button>
+    </ng-template>
+  </p-card>
+</form>

@@ -1,0 +1,50 @@
+<!-- PrimeNG -->
+<p-toast></p-toast>
+
+
+<div class="p-field p-grid" *ngIf="!!contact">
+  <p-card>
+    <ng-template pTemplate="header"> </ng-template>
+    <input
+      pInputText
+      p-d-block
+      type="text"
+      placeholder="Name"
+      id="name"
+      required
+      class="mr-2"
+      [(ngModel)]="contact.name"
+      name="name"
+    />
+    <input
+      pInputText
+      p-d-block
+      type="text"
+      placeholder="Contact"
+      id="contact"
+      required
+      class="mr-2"
+      [(ngModel)]="contact.mobile"
+      name="contact"
+    />
+    <input
+      pInputText
+      p-d-block
+      type="text"
+      placeholder="Email"
+      id="email"
+      required
+      class="mr-2"
+      [(ngModel)]="contact.email"
+      name="email"
+    />
+    <ng-template pTemplate="footer">
+      <p-confirmDialog
+        [style]="{ width: '50vw' }"
+        [baseZIndex]="10000"
+        rejectButtonStyleClass="p-button-text"
+      ></p-confirmDialog>
+      <button pButton label="Update" (click)="update()"></button>
+    </ng-template>
+  </p-card>
+</div>

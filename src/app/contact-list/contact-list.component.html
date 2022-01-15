@@ -1,0 +1,110 @@
+<p-toast></p-toast>
+
+<form
+  id="form"
+  #postForm="ngForm"
+  (ngSubmit)="onAdd(postForm.value); postForm.reset()"
+>
+  <div class="p-formgrid p-grid mb-5 mt-4">
+    <input
+      #name
+      type="text"
+      placeholder="Name"
+      pInputText
+      id="name"
+      required
+      ngModel
+      name="name"
+    />
+    <input
+      #mobile
+      pInputText
+      type="text"
+      placeholder="Mobile"
+      id="mobile"
+      class="ml-2"
+      ngModel
+      name="mobile"
+      mask="9999999999"
+    />
+    <input
+      #email
+      type="email"
+      placeholder="Email"
+      pInputText
+      id="email"
+      class="ml-2"
+      required
+      ngModel
+      name="email"
+    />
+    <button
+      pButton
+      label="Save Contacts"
+      class="p-button-primary ml-2"
+      [disabled]="!postForm.valid"
+      id="but"
+      type="submit"
+      (click)="showSuccess()"
+    ></button>
+  </div>
+</form>
+
+<!-- Table Start -->
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
+<p-table
+  #dt
+  [value]="contacts"
+  styleClass="p-datatable-striped"
+  responsiveLayout="scroll"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="['name']"
+  [rowHover]="true"
+>
+<ng-template pTemplate="caption">
+  <div class="p-d-flex p-ai-center p-jc-between ">
+      <h3 class="p-m-0">Manage Contacts</h3>
+      <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value,'contains')" placeholder="Search..." />
+      </span>
+  </div>
+</ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+      <th pSortableColumn="mobile">
+        Mobile<p-sortIcon field="mobile"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        Email<p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-contact>
+    <tr>
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.mobile }}</td>
+      <td>{{ contact.email }}</td>
+      <td>
+        <button
+          pButton
+          class="p-button-success p-button-rounded mr-2"
+          icon="pi pi-pencil"
+          [routerLink]="['/contact-list', contact.id]"
+        ></button>
+        <button
+          pButton
+          class="p-button-danger p-button-rounded"
+          icon="pi pi-trash"
+          (click)="onDelete(contact.id)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
